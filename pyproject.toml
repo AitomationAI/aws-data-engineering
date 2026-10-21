@@ -1,0 +1,36 @@
+[project]
+name = "aws-shipment-pipeline"
+version = "1.0.0"
+description = "Serverless AWS data pipeline: S3 -> Lambda -> Glue (PySpark) -> Redshift Serverless."
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Aitomation" }]
+
+[project.optional-dependencies]
+dev = [
+    "boto3>=1.34",
+    "moto[s3,glue,redshiftdata]>=5.0",
+    "pytest>=8.0",
+    "ruff>=0.5",
+]
+spark = ["pyspark==3.5.3"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+# Lambdas and the Glue script are deployed as standalone artifacts by
+# Terraform, so this file only manages dev tooling - nothing is packaged.
+[tool.setuptools]
+packages = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM"]

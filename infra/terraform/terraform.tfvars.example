@@ -1,0 +1,6 @@
+project                = "shipment-pipeline"
+environment            = "dev"
+aws_region             = "us-east-1"
+glue_number_of_workers = 2
+redshift_base_capacity = 8
+alert_email            = "data-alerts@example.com"
